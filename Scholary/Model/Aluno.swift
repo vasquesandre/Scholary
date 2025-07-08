@@ -10,4 +10,6 @@ import UIKit
 struct Aluno {
     let id: String
     let nome: String
+    let salaId: String?
+    let salaNome: String?
 }

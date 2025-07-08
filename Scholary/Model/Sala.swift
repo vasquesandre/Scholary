@@ -9,5 +9,5 @@ import UIKit
 
 struct Sala {
     let id: String
-    let nome: String
+    var nome: String
 }

@@ -51,18 +51,10 @@ class AlunosTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let aluno = alunos[indexPath.row]
-        
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-    }
-    
-    //MARK: - Add Button
-    
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "adicionarAlunos", sender: self)
     }
     
     override func tableView(_ tableView: UITableView,
@@ -102,8 +94,8 @@ class AlunosTableViewController: UITableViewController {
                         self.alunos.removeAll()
                         for doc in snapshotDocuments {
                             let data = doc.data()
-                            if let nome = data["nome"] as? String {
-                                let aluno = Aluno(id: doc.documentID, nome: nome)
+                            if let nome = data["nome"] as? String, let salaId = data["sala"] as? String {
+                                let aluno = Aluno(id: doc.documentID, nome: nome, salaId: nil, salaNome: nil)
                                 self.alunos.append(aluno)
                             }
                         }
@@ -114,6 +106,12 @@ class AlunosTableViewController: UITableViewController {
                 }
             }
         
+    }
+    
+    //MARK: - Add Button
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "adicionarAlunos", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -17,8 +17,8 @@ class AdicionarAlunosTableViewController: UITableViewController {
     
     var salaSelecionada: Sala?
     
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var vincularButton: UIButton!
+    @IBOutlet weak var novoAlunoButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,13 @@ class AdicionarAlunosTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.textLabel!.text = alunos[indexPath.row].nome
+        let aluno = alunos[indexPath.row]
+        
+        if let salaNome = aluno.salaNome, !salaNome.isEmpty {
+            cell.textLabel?.text = "\(aluno.nome) | \(salaNome)"
+        } else {
+            cell.textLabel?.text = aluno.nome
+        }
         
         if alunosSelecionados.contains(indexPath.row) {
             cell.accessoryType = .checkmark
@@ -48,9 +54,9 @@ class AdicionarAlunosTableViewController: UITableViewController {
         
     }
     
-    //MARK: - Add Button Pressed
+    //MARK: - Novo Aluno Button Pressed
     
-    @IBAction func addButtonPressed(_ sender: UIButton) {
+    @IBAction func novoAlunoButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
         
@@ -79,7 +85,7 @@ class AdicionarAlunosTableViewController: UITableViewController {
         
     }
 
-    @IBAction func vincularButtonPressed(_ sender: UIButton) {
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         guard let salaSelecionada = salaSelecionada else {
             let alert = UIAlertController(title: "Erro", message: "Nenhuma sala selecionada.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -130,14 +136,30 @@ class AdicionarAlunosTableViewController: UITableViewController {
                     self.alunos.removeAll()
                     for doc in snapshotDocuments {
                         let data = doc.data()
-                        if let nome = data["nome"] as? String {
-                            let aluno = Aluno(id: doc.documentID, nome: nome)
+                        print(data)
+                        let alunoID = doc.documentID
+                        let nome = data["nome"] as? String ?? ""
+                        let salaId = data["sala"] as? String
+                        if let salaId = salaId, !salaId.isEmpty {
+                            self.db.collection("salas").document(salaId).getDocument { (salaSnapshot, error) in
+                                let salaNome = salaSnapshot?.data()?["nome"] as? String
+                                let aluno = Aluno(id: alunoID, nome: nome, salaId: salaId, salaNome: salaNome)
+                                self.alunos.append(aluno)
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                    
+                                }
+                            }
+                        } else {
+                            let aluno = Aluno(id: alunoID, nome: nome, salaId: nil, salaNome: nil)
                             self.alunos.append(aluno)
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
                         }
                     }
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    print(snapshotDocuments)
+                    print(self.alunos)
                 }
             }
         }
@@ -158,12 +180,11 @@ class AdicionarAlunosTableViewController: UITableViewController {
     
     func atualizarBotoes() {
         if alunosSelecionados.isEmpty {
-            addButton.isHidden = false
-            vincularButton.isHidden = true
+            doneButton.isEnabled = false
         } else {
-            addButton.isHidden = true
-            vincularButton.isHidden = false
+            doneButton.isEnabled = true
         }
     }
 
 }
+

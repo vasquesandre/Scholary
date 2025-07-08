@@ -71,13 +71,65 @@ class SalasTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let sala = self.salas[indexPath.row]
+        let alunosRef = self.db.collection("alunos").whereField("sala", isEqualTo: sala.id)
+        
+        let desvincularAction = UIContextualAction(style: .normal, title: "Desvincular") { _, _, completionHandler in
+            alunosRef.getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Erro ao buscar alunos: \(error.localizedDescription)")
+                } else {
+                    let documentos = snapshot?.documents ?? []
+                    var desvinculados = 0
+                    let dispatchGroup = DispatchGroup()
+                    for doc in documentos {
+                        dispatchGroup.enter()
+                        let alunoRef = self.db.collection("alunos").document(doc.documentID)
+                        alunoRef.updateData(["sala": ""]) { err in
+                            if err == nil {
+                                desvinculados += 1
+                            }
+                            dispatchGroup.leave()
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        self.validationAlert(title: "\(desvinculados) Alunos Desvinculados", message: "")
+                    }
+                }
+                completionHandler(true)
+                
+            }
+        }
+        desvincularAction.backgroundColor = .orange
+        
+        let renomearAction = UIContextualAction(style: .normal, title: "Renomear") { _, _, completionHandler in
+            let alert = UIAlertController(title: "Renomear Sala", message: "Informe o novo nome da sala.", preferredStyle: .alert)
+            alert.addTextField { textField in
+                textField.text = sala.nome
+            }
+            alert.addAction(UIAlertAction(title: "Salvar", style: .default, handler: { _ in
+                let novoNome = alert.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                if !novoNome.isEmpty {
+                    self.db.collection("salas").document(sala.id).updateData(["nome": novoNome]) { err in
+                        if let err = err {
+                            print("Erro ao renomear sala: \(err.localizedDescription)")
+                        } else {
+                            self.salas[indexPath.row].nome = novoNome
+                            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            self.validationAlert(title: "\(novoNome)", message: "Nome da sala atualizado")
+                        }
+                    }
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            completionHandler(true)
+        }
 
         let deleteAction = UIContextualAction(style: .destructive, title: "Apagar") { _, _, completionHandler in
-            let salaASerRemovida = self.salas[indexPath.row]
-            let salaId = salaASerRemovida.id
             self.salas.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            let alunosRef = self.db.collection("alunos").whereField("sala", isEqualTo: salaId)
             alunosRef.getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Erro ao buscar alunos: \(error.localizedDescription)")
@@ -97,14 +149,11 @@ class SalasTableViewController: UITableViewController {
                     }
                 }
                 dispatchGroup.notify(queue: .main) {
-                    self.db.collection("salas").document(salaId).delete { err in
+                    self.db.collection("salas").document(sala.id).delete { err in
                         if let err = err {
                             print("Erro ao remover sala: \(err.localizedDescription)")
                         } else {
-                            // Mostrar alerta
-                            let alerta = UIAlertController(title: "Sala removida", message: "Desvinculados \(desvinculados) alunos da sala.", preferredStyle: .alert)
-                            alerta.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            self.present(alerta, animated: true, completion: nil)
+                            self.validationAlert(title: "Sala Removida", message: "\(desvinculados) alunos desvinculados da sala.")
                         }
                     }
                 }
@@ -112,7 +161,7 @@ class SalasTableViewController: UITableViewController {
             completionHandler(true)
         }
 
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        return UISwipeActionsConfiguration(actions: [deleteAction, desvincularAction, renomearAction])
     }
     
     //MARK: - Data Manipulation
@@ -172,5 +221,13 @@ class SalasTableViewController: UITableViewController {
         }
     }
     
-
+    //MARK: - Validation Alert
+    
+    func validationAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let message = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(message)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }

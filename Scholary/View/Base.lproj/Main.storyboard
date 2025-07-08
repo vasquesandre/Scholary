@@ -11,16 +11,16 @@
         <scene sceneID="AWi-Mc-Phs">
             <objects>
                 <tableViewController id="X5A-kS-dMS" customClass="SalasTableViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2bo-JI-shN">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2bo-JI-shN">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SalasCell" id="ds8-JF-gDR">
-                                <rect key="frame" x="0.0" y="50" width="402" height="51"/>
+                                <rect key="frame" x="0.0" y="50" width="402" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ds8-JF-gDR" id="njr-uh-cxw">
-                                    <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="51"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -30,7 +30,7 @@
                             <outlet property="delegate" destination="X5A-kS-dMS" id="Msg-Cs-yrp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Salas" largeTitleDisplayMode="always" id="B2j-tU-oZA">
+                    <navigationItem key="navigationItem" title="Salas" id="B2j-tU-oZA">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OIC-i0-lYw">
                             <color key="tintColor" systemColor="labelColor"/>
                             <connections>
@@ -50,16 +50,16 @@
         <scene sceneID="STX-Nd-w8l">
             <objects>
                 <tableViewController id="f8Z-dy-Hp4" customClass="AlunosTableViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gII-D9-TXZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gII-D9-TXZ">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="GRu-xH-xPF">
-                                <rect key="frame" x="0.0" y="50" width="402" height="51"/>
+                                <rect key="frame" x="0.0" y="50" width="402" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GRu-xH-xPF" id="rTo-eX-2b6">
-                                    <rect key="frame" x="0.0" y="0.0" width="402" height="51"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="402" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -78,59 +78,24 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="kb4-3O-e68" kind="showDetail" identifier="adicionarAlunos" id="gnV-W2-Vl9"/>
+                        <segue destination="kb4-3O-e68" kind="show" identifier="adicionarAlunos" id="gnV-W2-Vl9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQo-6L-YP4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2557" y="-85"/>
         </scene>
-        <!--Adicionar Alunos Table View Controller-->
+        <!--Selecionar Alunos-->
         <scene sceneID="Pab-vl-V7p">
             <objects>
                 <tableViewController id="kb4-3O-e68" customClass="AdicionarAlunosTableViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="c5k-Di-cGO">
-                        <rect key="frame" x="0.0" y="0.0" width="402" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="RcK-u1-2Ai">
-                            <rect key="frame" x="0.0" y="0.0" width="402" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecionar Alunos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0AW-dV-Vgb" customClass="adi">
-                                    <rect key="frame" x="20" y="10" width="250" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emr-gX-yOc">
-                                    <rect key="frame" x="330" y="16" width="38" height="38"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
-                                        <backgroundConfiguration key="background"/>
-                                        <color key="baseForegroundColor" systemColor="labelColor"/>
-                                    </buttonConfiguration>
-                                    <connections>
-                                        <action selector="addButtonPressed:" destination="kb4-3O-e68" eventType="touchUpInside" id="U4D-yE-E2Z"/>
-                                    </connections>
-                                </button>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gej-93-y62">
-                                    <rect key="frame" x="298" y="17" width="86" height="35"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Vincular">
-                                        <color key="baseForegroundColor" systemColor="labelColor"/>
-                                    </buttonConfiguration>
-                                    <connections>
-                                        <action selector="vincularButtonPressed:" destination="kb4-3O-e68" eventType="touchUpInside" id="has-or-Amt"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kZJ-Dg-BeY">
-                                <rect key="frame" x="0.0" y="115" width="402" height="51"/>
+                                <rect key="frame" x="0.0" y="50" width="402" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kZJ-Dg-BeY" id="9q5-0A-U2b">
                                     <rect key="frame" x="0.0" y="0.0" width="402" height="51"/>
@@ -143,9 +108,25 @@
                             <outlet property="delegate" destination="kb4-3O-e68" id="Y5E-S8-ohW"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Selecionar Alunos" id="XH4-ld-pZr">
+                        <rightBarButtonItems>
+                            <barButtonItem enabled="NO" systemItem="done" id="wXz-ph-FdU">
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="kb4-3O-e68" id="5W2-lc-P94"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Novo Aluno" id="kra-OD-mHL">
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <connections>
+                                    <action selector="novoAlunoButtonPressed:" destination="kb4-3O-e68" id="tCt-Ua-kac"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="Emr-gX-yOc" id="pJx-AH-kzN"/>
-                        <outlet property="vincularButton" destination="gej-93-y62" id="mT0-Ue-2Z1"/>
+                        <outlet property="doneButton" destination="wXz-ph-FdU" id="1i7-TJ-XMT"/>
+                        <outlet property="novoAlunoButton" destination="kra-OD-mHL" id="EEs-VV-lQm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJS-xx-4tP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -157,8 +138,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a8c-2e-8YG" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PVI-Kw-bgl">
-                        <rect key="frame" x="0.0" y="124" width="402" height="54"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="PVI-Kw-bgl">
+                        <rect key="frame" x="0.0" y="124" width="402" height="106"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" systemColor="labelColor"/>
@@ -175,7 +156,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
