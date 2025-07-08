@@ -19,7 +19,7 @@ class AlunosTableViewController: UITableViewController {
             carregarAlunos()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -28,13 +28,13 @@ class AlunosTableViewController: UITableViewController {
             title = sala.nome
         }
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alunos.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -65,6 +65,27 @@ class AlunosTableViewController: UITableViewController {
         performSegue(withIdentifier: "adicionarAlunos", sender: self)
     }
     
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Apagar") { _, _, completionHandler in
+            let alunoASerDesvinculado = self.alunos[indexPath.row]
+            self.alunos.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let alunoRef = self.db.collection("alunos").document(alunoASerDesvinculado.id)
+            alunoRef.updateData(["sala": ""]) { error in
+                if let error = error {
+                    print("Erro ao desvincular aluno: \(error.localizedDescription)")
+                } else {
+                    print("Aluno desvinculado da sala com sucesso.")
+                }
+            }
+            completionHandler(true)
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
     //MARK: - Data Manipulation
     
     func carregarAlunos() {
@@ -74,24 +95,24 @@ class AlunosTableViewController: UITableViewController {
             .whereField("sala", isEqualTo: sala.id)
             .order(by: "nome")
             .addSnapshotListener { (snapshot, error) in
-            if let e = error {
-                print("Error retrieving data form Firestore -> \(e)")
-            } else {
-                if let snapshotDocuments = snapshot?.documents {
-                    self.alunos.removeAll()
-                    for doc in snapshotDocuments {
-                        let data = doc.data()
-                        if let nome = data["nome"] as? String {
-                            let aluno = Aluno(id: doc.documentID, nome: nome)
-                            self.alunos.append(aluno)
+                if let e = error {
+                    print("Error retrieving data form Firestore -> \(e)")
+                } else {
+                    if let snapshotDocuments = snapshot?.documents {
+                        self.alunos.removeAll()
+                        for doc in snapshotDocuments {
+                            let data = doc.data()
+                            if let nome = data["nome"] as? String {
+                                let aluno = Aluno(id: doc.documentID, nome: nome)
+                                self.alunos.append(aluno)
+                            }
                         }
-                    }
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
             }
-        }
         
     }
     
@@ -102,5 +123,5 @@ class AlunosTableViewController: UITableViewController {
             destinationVC.salaSelecionada = sala
         }
     }
-
+    
 }

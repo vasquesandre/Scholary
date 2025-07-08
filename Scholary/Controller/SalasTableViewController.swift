@@ -27,11 +27,15 @@ class SalasTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.textLabel!.text = salas[indexPath.row].nome
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SalasCell", for: indexPath)
+        
+        let sala = salas[indexPath.row]
+        
+        cell.textLabel?.text = sala.nome
         
         return cell
+        
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -61,6 +65,54 @@ class SalasTableViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    //MARK: - Delete Data from Swipe
+    
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Apagar") { _, _, completionHandler in
+            let salaASerRemovida = self.salas[indexPath.row]
+            let salaId = salaASerRemovida.id
+            self.salas.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let alunosRef = self.db.collection("alunos").whereField("sala", isEqualTo: salaId)
+            alunosRef.getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Erro ao buscar alunos: \(error.localizedDescription)")
+                    return
+                }
+                let documentos = snapshot?.documents ?? []
+                var desvinculados = 0
+                let dispatchGroup = DispatchGroup()
+                for doc in documentos {
+                    dispatchGroup.enter()
+                    let alunoRef = self.db.collection("alunos").document(doc.documentID)
+                    alunoRef.updateData(["sala": ""]) { err in
+                        if err == nil {
+                            desvinculados += 1
+                        }
+                        dispatchGroup.leave()
+                    }
+                }
+                dispatchGroup.notify(queue: .main) {
+                    self.db.collection("salas").document(salaId).delete { err in
+                        if let err = err {
+                            print("Erro ao remover sala: \(err.localizedDescription)")
+                        } else {
+                            // Mostrar alerta
+                            let alerta = UIAlertController(title: "Sala removida", message: "Desvinculados \(desvinculados) alunos da sala.", preferredStyle: .alert)
+                            alerta.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alerta, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+            completionHandler(true)
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     //MARK: - Data Manipulation

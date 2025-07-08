@@ -24,8 +24,6 @@ class AdicionarAlunosTableViewController: UITableViewController {
         super.viewDidLoad()
 
         carregarTodosOsAlunos()
-        
-        print("teste")
     }
 
     // MARK: - Table view data source
