@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		540A3AD42E200617008DCC20 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A3AD32E200617008DCC20 /* Alerts.swift */; };
+		540A3AD72E2023C0008DCC20 /* NovoAlunoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A3AD62E2023C0008DCC20 /* NovoAlunoViewController.swift */; };
 		543FAFA82E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFA72E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift */; };
 		543FAFAA2E1C46C5008B68B4 /* Aluno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFA92E1C46C5008B68B4 /* Aluno.swift */; };
 		543FAFAC2E1C4954008B68B4 /* Sala.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFAB2E1C4954008B68B4 /* Sala.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		540A3AD32E200617008DCC20 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		540A3AD62E2023C0008DCC20 /* NovoAlunoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovoAlunoViewController.swift; sourceTree = "<group>"; };
 		543FAFA72E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionarAlunosTableViewController.swift; sourceTree = "<group>"; };
 		543FAFA92E1C46C5008B68B4 /* Aluno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aluno.swift; sourceTree = "<group>"; };
 		543FAFAB2E1C4954008B68B4 /* Sala.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sala.swift; sourceTree = "<group>"; };
@@ -57,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		540A3AD52E200760008DCC20 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				540A3AD32E200617008DCC20 /* Alerts.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		54ED9AB62E1BF2D90088F031 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +93,7 @@
 				54ED9AE82E1BF2EC0088F031 /* Model */,
 				54ED9AE92E1BF2F20088F031 /* View */,
 				54ED9AEA2E1BF2F70088F031 /* Controller */,
+				540A3AD52E200760008DCC20 /* Helpers */,
 				54ED9AEB2E1BF32A0088F031 /* Assets */,
 				54ED9ADB2E1BF2E80088F031 /* LaunchScreen.storyboard */,
 				54C0F82B2E1CBBAB0094F4C4 /* GoogleService-Info.plist */,
@@ -112,6 +125,7 @@
 				54ED9AEC2E1BF5DD0088F031 /* SalasTableViewController.swift */,
 				54D5E5FC2E1C0D36002AAC5B /* AlunosTableViewController.swift */,
 				543FAFA72E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift */,
+				540A3AD62E2023C0008DCC20 /* NovoAlunoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -207,8 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				540A3AD42E200617008DCC20 /* Alerts.swift in Sources */,
 				543FAFA82E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift in Sources */,
 				54ED9AED2E1BF5DD0088F031 /* SalasTableViewController.swift in Sources */,
+				540A3AD72E2023C0008DCC20 /* NovoAlunoViewController.swift in Sources */,
 				543FAFAC2E1C4954008B68B4 /* Sala.swift in Sources */,
 				54ED9AE12E1BF2E80088F031 /* AppDelegate.swift in Sources */,
 				543FAFAA2E1C46C5008B68B4 /* Aluno.swift in Sources */,

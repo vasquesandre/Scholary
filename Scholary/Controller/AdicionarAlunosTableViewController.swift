@@ -58,32 +58,11 @@ class AdicionarAlunosTableViewController: UITableViewController {
     
     @IBAction func novoAlunoButtonPressed(_ sender: UIBarButtonItem) {
         
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Novo Aluno", message: "Adicione um novo aluno para ser vinculado à uma sala posteriormente.", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Adicionar", style: .default) { action in
-            guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty else {
-                return
-            }
-            
-            let novoAluno = text
-            self.novoAluno(nome: novoAluno)
-        }
-        
-        let cancel = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Nome do aluno"
-            textField = alertTextField
-        }
-        
-        alert.addAction(action)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
+        performSegue(withIdentifier: "goToNovoAluno", sender: self)
         
     }
+    
+    //MARK: - Done Button Pressed
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         guard let salaSelecionada = salaSelecionada else {
@@ -93,36 +72,25 @@ class AdicionarAlunosTableViewController: UITableViewController {
             return
         }
         let alunosParaVincular = alunosSelecionados.map { alunos[$0] }
+        let dispatchGroup = DispatchGroup()
         for aluno in alunosParaVincular {
+            dispatchGroup.enter()
             db.collection("alunos").document(aluno.id).updateData(["sala": salaSelecionada.id]) { error in
                 if let error = error {
                     print("Erro ao vincular sala para aluno \(aluno.nome): \(error)")
-                } else {
-                    let alert = UIAlertController(title: "Alunos Vinculados", message: "Os alunos selecionados foram adicionados à sala \(salaSelecionada.nome)", preferredStyle: .alert)
-                    
-                    let message = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    
-                    alert.addAction(message)
-                    
-                    self.present(alert, animated: true, completion: nil)
                 }
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            if let navigationController = self.navigationController {
+                navigationController.popViewController(animated: true)
+                self.validationAlert(title: "Alunos vinculados", message: "\(self.alunosSelecionados.count) foram vinculados à \(salaSelecionada.nome)")
             }
         }
     }
 
     //MARK: - Data Manipulation
-    
-    func novoAluno(nome: String) {
-        db.collection("alunos").addDocument(data: [
-            "nome": nome
-        ]) { (error) in
-            if let e = error {
-                print("Issue saving to firestore, \(e)")
-            } else {
-                print("Successfully saved")
-            }
-        }
-    }
     
     func carregarTodosOsAlunos() {
         
@@ -134,9 +102,10 @@ class AdicionarAlunosTableViewController: UITableViewController {
             } else {
                 if let snapshotDocuments = snapshot?.documents {
                     self.alunos.removeAll()
+                    let dispatchGroup = DispatchGroup()
                     for doc in snapshotDocuments {
+                        dispatchGroup.enter()
                         let data = doc.data()
-                        print(data)
                         let alunoID = doc.documentID
                         let nome = data["nome"] as? String ?? ""
                         let salaId = data["sala"] as? String
@@ -145,21 +114,17 @@ class AdicionarAlunosTableViewController: UITableViewController {
                                 let salaNome = salaSnapshot?.data()?["nome"] as? String
                                 let aluno = Aluno(id: alunoID, nome: nome, salaId: salaId, salaNome: salaNome)
                                 self.alunos.append(aluno)
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
-                                    
-                                }
+                                dispatchGroup.leave()
                             }
                         } else {
                             let aluno = Aluno(id: alunoID, nome: nome, salaId: nil, salaNome: nil)
                             self.alunos.append(aluno)
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
+                            dispatchGroup.leave()
                         }
                     }
-                    print(snapshotDocuments)
-                    print(self.alunos)
+                    dispatchGroup.notify(queue: .main) {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
@@ -188,3 +153,25 @@ class AdicionarAlunosTableViewController: UITableViewController {
 
 }
 
+//MARK: - UISearchBarDelegate
+
+extension AdicionarAlunosTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            carregarTodosOsAlunos()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        } else{
+            alunos = alunos.filter { $0.nome.localizedCaseInsensitiveContains(searchText) }
+            
+            tableView.reloadData()
+        }
+    }
+}

@@ -3,6 +3,7 @@
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24053.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -93,9 +94,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Digite o nome do aluno aqui" id="uJ3-eV-0GI">
+                            <rect key="frame" x="0.0" y="0.0" width="402" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="kb4-3O-e68" id="SMF-Wd-vjR"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kZJ-Dg-BeY">
-                                <rect key="frame" x="0.0" y="50" width="402" height="51"/>
+                                <rect key="frame" x="0.0" y="94" width="402" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kZJ-Dg-BeY" id="9q5-0A-U2b">
                                     <rect key="frame" x="0.0" y="0.0" width="402" height="51"/>
@@ -127,11 +136,80 @@
                     <connections>
                         <outlet property="doneButton" destination="wXz-ph-FdU" id="1i7-TJ-XMT"/>
                         <outlet property="novoAlunoButton" destination="kra-OD-mHL" id="EEs-VV-lQm"/>
+                        <segue destination="1hx-OX-sQg" kind="showDetail" identifier="goToNovoAluno" id="ZRl-VZ-slW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJS-xx-4tP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2556.7164179104475" y="696.7963386727688"/>
+        </scene>
+        <!--Novo Aluno View Controller-->
+        <scene sceneID="bOy-qo-HdY">
+            <objects>
+                <viewController id="1hx-OX-sQg" customClass="NovoAlunoViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jFB-tr-2V8">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-hx-VhK">
+                                <rect key="frame" x="16" y="87" width="370" height="140"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do Aluno" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajZ-el-EZr">
+                                        <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nTF-Ir-fdP">
+                                        <rect key="frame" x="0.0" y="40" width="370" height="45"/>
+                                        <color key="backgroundColor" red="0.1529411765" green="0.13725490200000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="huF-WG-Rxe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" textContentType="name"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2CD-v9-ke4">
+                                        <rect key="frame" x="0.0" y="95" width="370" height="45"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="DGk-vu-Tx4"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Adicionar">
+                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="adicionarButton:" destination="1hx-OX-sQg" eventType="touchUpInside" id="jVC-5l-QQc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nTF-Ir-fdP" firstAttribute="leading" secondItem="QAZ-hx-VhK" secondAttribute="leading" id="4I8-ai-OOu"/>
+                                    <constraint firstAttribute="trailing" secondItem="2CD-v9-ke4" secondAttribute="trailing" id="Pca-7t-IQ4"/>
+                                    <constraint firstItem="nTF-Ir-fdP" firstAttribute="top" secondItem="ajZ-el-EZr" secondAttribute="bottom" constant="10" id="gKb-VN-uHg"/>
+                                    <constraint firstItem="2CD-v9-ke4" firstAttribute="leading" secondItem="QAZ-hx-VhK" secondAttribute="leading" id="tMF-Ph-KjC"/>
+                                    <constraint firstAttribute="trailing" secondItem="nTF-Ir-fdP" secondAttribute="trailing" id="wQ5-Ph-tvx"/>
+                                    <constraint firstAttribute="bottom" secondItem="2CD-v9-ke4" secondAttribute="bottom" id="x8E-Eg-eHQ"/>
+                                    <constraint firstItem="2CD-v9-ke4" firstAttribute="top" secondItem="nTF-Ir-fdP" secondAttribute="bottom" constant="10" id="z1G-RX-PeO"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="s88-Jf-O0d"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QAZ-hx-VhK" firstAttribute="top" secondItem="s88-Jf-O0d" secondAttribute="top" constant="25" id="c9G-oR-1ZM"/>
+                            <constraint firstItem="s88-Jf-O0d" firstAttribute="trailing" secondItem="QAZ-hx-VhK" secondAttribute="trailing" constant="16" id="gfs-P9-QCB"/>
+                            <constraint firstItem="QAZ-hx-VhK" firstAttribute="leading" secondItem="s88-Jf-O0d" secondAttribute="leading" constant="16" id="jUr-X6-83Z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nomeAlunoTextField" destination="nTF-Ir-fdP" id="Qgf-2R-AR4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P1Q-Wq-ZhU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3555" y="697"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WyU-Xw-UfU">
@@ -161,6 +239,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

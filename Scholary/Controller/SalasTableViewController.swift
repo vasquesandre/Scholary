@@ -76,30 +76,31 @@ class SalasTableViewController: UITableViewController {
         let alunosRef = self.db.collection("alunos").whereField("sala", isEqualTo: sala.id)
         
         let desvincularAction = UIContextualAction(style: .normal, title: "Desvincular") { _, _, completionHandler in
-            alunosRef.getDocuments { (snapshot, error) in
-                if let error = error {
-                    print("Erro ao buscar alunos: \(error.localizedDescription)")
-                } else {
-                    let documentos = snapshot?.documents ?? []
-                    var desvinculados = 0
-                    let dispatchGroup = DispatchGroup()
-                    for doc in documentos {
-                        dispatchGroup.enter()
-                        let alunoRef = self.db.collection("alunos").document(doc.documentID)
-                        alunoRef.updateData(["sala": ""]) { err in
-                            if err == nil {
-                                desvinculados += 1
+            self.confirmationAlert(title: "Desvincular todos os alunos", message: "Tem certeza que deseja desvincular todos os alunos dessa sala?", onConfirm: {
+                alunosRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Erro ao buscar alunos: \(error.localizedDescription)")
+                    } else {
+                        let documentos = snapshot?.documents ?? []
+                        var desvinculados = 0
+                        let dispatchGroup = DispatchGroup()
+                        for doc in documentos {
+                            dispatchGroup.enter()
+                            let alunoRef = self.db.collection("alunos").document(doc.documentID)
+                            alunoRef.updateData(["sala": ""]) { err in
+                                if err == nil {
+                                    desvinculados += 1
+                                }
+                                dispatchGroup.leave()
                             }
-                            dispatchGroup.leave()
+                        }
+                        dispatchGroup.notify(queue: .main) {
+                            self.validationAlert(title: "\(desvinculados) Alunos Desvinculados", message: "")
                         }
                     }
-                    dispatchGroup.notify(queue: .main) {
-                        self.validationAlert(title: "\(desvinculados) Alunos Desvinculados", message: "")
-                    }
+                    completionHandler(true)
                 }
-                completionHandler(true)
-                
-            }
+            })
         }
         desvincularAction.backgroundColor = .orange
         
@@ -219,15 +220,6 @@ class SalasTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.salaSelecionada = salas[indexPath.row]
         }
-    }
-    
-    //MARK: - Validation Alert
-    
-    func validationAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let message = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(message)
-        self.present(alert, animated: true, completion: nil)
     }
     
 }
