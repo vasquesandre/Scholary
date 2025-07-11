@@ -41,27 +41,42 @@ class AlunoService {
             .addSnapshotListener { (snapshot, error) in
             if let e = error {
                 print("Error retrieving data form Firestore -> \(e)")
+                completion([])
             } else {
-                var alunos: [Aluno] = []
-                if let snapshotDocuments = snapshot?.documents {
-                    for doc in snapshotDocuments {
-                        let data = doc.data()
-                        let alunoID = doc.documentID
-                        let nome = data["nome"] as? String ?? ""
-                        let salaId = data["sala"] as? String
-                        if let salaId = salaId, !salaId.isEmpty {
-                            self.db.collection("salas").document(salaId).getDocument { (salaSnapshot, error) in
-                                let salaNome = salaSnapshot?.data()?["nome"] as? String
-                                let aluno = Aluno(id: alunoID, nome: nome, salaId: salaId, salaNome: salaNome)
-                                alunos.append(aluno)
+                guard let snapshotDocuments = snapshot?.documents else {
+                    completion([])
+                    return
+                }
+                var alunos: [Aluno] = Array(repeating: Aluno(id: "", nome: "", salaId: nil, salaNome: nil), count: snapshotDocuments.count)
+                var completedCount = 0
+                if snapshotDocuments.isEmpty {
+                    completion([])
+                    return
+                }
+                for (index, doc) in snapshotDocuments.enumerated() {
+                    let data = doc.data()
+                    let alunoID = doc.documentID
+                    let nome = data["nome"] as? String ?? ""
+                    let salaId = data["sala"] as? String
+                    if let salaId = salaId, !salaId.isEmpty {
+                        self.db.collection("salas").document(salaId).getDocument { (salaSnapshot, error) in
+                            let salaNome = salaSnapshot?.data()? ["nome"] as? String
+                            let aluno = Aluno(id: alunoID, nome: nome, salaId: salaId, salaNome: salaNome)
+                            alunos[index] = aluno
+                            completedCount += 1
+                            if completedCount == snapshotDocuments.count {
+                                completion(alunos)
                             }
-                        } else {
-                            let aluno = Aluno(id: alunoID, nome: nome, salaId: nil, salaNome: nil)
-                            alunos.append(aluno)
+                        }
+                    } else {
+                        let aluno = Aluno(id: alunoID, nome: nome, salaId: nil, salaNome: nil)
+                        alunos[index] = aluno
+                        completedCount += 1
+                        if completedCount == snapshotDocuments.count {
+                            completion(alunos)
                         }
                     }
                 }
-                completion(alunos)
             }
         }
     }
@@ -95,7 +110,7 @@ class AlunoService {
     }
     
     func buscarAlunosDaSala(sala: Sala, completion: @escaping (Query) -> Void) {
-        var alunos = db.collection("alunos").whereField("sala", isEqualTo: sala.id)
+        let alunos = db.collection("alunos").whereField("sala", isEqualTo: sala.id)
         completion(alunos)
     }
 }

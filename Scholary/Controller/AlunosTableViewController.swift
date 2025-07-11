@@ -46,3 +46,29 @@ class AlunosTableViewController: UITableViewController {
     }
 
 }
+
+//MARK: - UISearchBarDelegate
+
+extension AlunosTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            alunoService.carregarTodosOsAlunos { [weak self] alunos in
+                DispatchQueue.main.async {
+                    self?.alunos = alunos
+                    self?.tableView.reloadData()
+                    searchBar.resignFirstResponder()
+                }
+            }
+        } else{
+            alunos = alunos.filter { $0.nome.localizedCaseInsensitiveContains(searchText) }
+            
+            tableView.reloadData()
+        }
+    }
+}
