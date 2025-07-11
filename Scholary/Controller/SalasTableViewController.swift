@@ -215,7 +215,7 @@ class SalasTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! AlunosTableViewController
+        let destinationVC = segue.destination as! SalaAlunosTableViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.salaSelecionada = salas[indexPath.row]

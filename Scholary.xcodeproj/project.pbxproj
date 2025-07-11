@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		540A3AD42E200617008DCC20 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A3AD32E200617008DCC20 /* Alerts.swift */; };
 		540A3AD72E2023C0008DCC20 /* NovoAlunoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A3AD62E2023C0008DCC20 /* NovoAlunoViewController.swift */; };
-		543FAFA82E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFA72E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift */; };
+		540A3AD92E20455B008DCC20 /* EditarAlunoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A3AD82E20455B008DCC20 /* EditarAlunoViewController.swift */; };
+		543FAFA82E1C1711008B68B4 /* VincularAlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFA72E1C1711008B68B4 /* VincularAlunosTableViewController.swift */; };
 		543FAFAA2E1C46C5008B68B4 /* Aluno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFA92E1C46C5008B68B4 /* Aluno.swift */; };
 		543FAFAC2E1C4954008B68B4 /* Sala.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543FAFAB2E1C4954008B68B4 /* Sala.swift */; };
 		54C0F82C2E1CBBAB0094F4C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54C0F82B2E1CBBAB0094F4C4 /* GoogleService-Info.plist */; };
-		54D5E5FD2E1C0D36002AAC5B /* AlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5E5FC2E1C0D36002AAC5B /* AlunosTableViewController.swift */; };
+		54D5E5FD2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5E5FC2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift */; };
+		54D9F1582E215854001CE65B /* AlunoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D9F1572E215854001CE65B /* AlunoService.swift */; };
+		54DAA5F12E21395E008D6037 /* AlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */; };
 		54ED9AE12E1BF2E80088F031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED9AD72E1BF2E80088F031 /* AppDelegate.swift */; };
 		54ED9AE22E1BF2E80088F031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED9ADE2E1BF2E80088F031 /* SceneDelegate.swift */; };
 		54ED9AE42E1BF2E80088F031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54ED9AD82E1BF2E80088F031 /* Assets.xcassets */; };
@@ -30,11 +33,14 @@
 /* Begin PBXFileReference section */
 		540A3AD32E200617008DCC20 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		540A3AD62E2023C0008DCC20 /* NovoAlunoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovoAlunoViewController.swift; sourceTree = "<group>"; };
-		543FAFA72E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionarAlunosTableViewController.swift; sourceTree = "<group>"; };
+		540A3AD82E20455B008DCC20 /* EditarAlunoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarAlunoViewController.swift; sourceTree = "<group>"; };
+		543FAFA72E1C1711008B68B4 /* VincularAlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VincularAlunosTableViewController.swift; sourceTree = "<group>"; };
 		543FAFA92E1C46C5008B68B4 /* Aluno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aluno.swift; sourceTree = "<group>"; };
 		543FAFAB2E1C4954008B68B4 /* Sala.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sala.swift; sourceTree = "<group>"; };
 		54C0F82B2E1CBBAB0094F4C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		54D5E5FC2E1C0D36002AAC5B /* AlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunosTableViewController.swift; sourceTree = "<group>"; };
+		54D5E5FC2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaAlunosTableViewController.swift; sourceTree = "<group>"; };
+		54D9F1572E215854001CE65B /* AlunoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoService.swift; sourceTree = "<group>"; };
+		54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunosTableViewController.swift; sourceTree = "<group>"; };
 		54ED9ABF2E1BF2D90088F031 /* Scholary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scholary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54ED9AD72E1BF2E80088F031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54ED9AD82E1BF2E80088F031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				543FAFA92E1C46C5008B68B4 /* Aluno.swift */,
+				54D9F1572E215854001CE65B /* AlunoService.swift */,
 				543FAFAB2E1C4954008B68B4 /* Sala.swift */,
 			);
 			path = Model;
@@ -123,9 +130,11 @@
 			isa = PBXGroup;
 			children = (
 				54ED9AEC2E1BF5DD0088F031 /* SalasTableViewController.swift */,
-				54D5E5FC2E1C0D36002AAC5B /* AlunosTableViewController.swift */,
-				543FAFA72E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift */,
+				54D5E5FC2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift */,
+				543FAFA72E1C1711008B68B4 /* VincularAlunosTableViewController.swift */,
 				540A3AD62E2023C0008DCC20 /* NovoAlunoViewController.swift */,
+				540A3AD82E20455B008DCC20 /* EditarAlunoViewController.swift */,
+				54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -222,14 +231,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				540A3AD42E200617008DCC20 /* Alerts.swift in Sources */,
-				543FAFA82E1C1711008B68B4 /* AdicionarAlunosTableViewController.swift in Sources */,
+				54D9F1582E215854001CE65B /* AlunoService.swift in Sources */,
+				540A3AD92E20455B008DCC20 /* EditarAlunoViewController.swift in Sources */,
+				543FAFA82E1C1711008B68B4 /* VincularAlunosTableViewController.swift in Sources */,
 				54ED9AED2E1BF5DD0088F031 /* SalasTableViewController.swift in Sources */,
 				540A3AD72E2023C0008DCC20 /* NovoAlunoViewController.swift in Sources */,
 				543FAFAC2E1C4954008B68B4 /* Sala.swift in Sources */,
 				54ED9AE12E1BF2E80088F031 /* AppDelegate.swift in Sources */,
 				543FAFAA2E1C46C5008B68B4 /* Aluno.swift in Sources */,
 				54ED9AE22E1BF2E80088F031 /* SceneDelegate.swift in Sources */,
-				54D5E5FD2E1C0D36002AAC5B /* AlunosTableViewController.swift in Sources */,
+				54DAA5F12E21395E008D6037 /* AlunosTableViewController.swift in Sources */,
+				54D5E5FD2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
