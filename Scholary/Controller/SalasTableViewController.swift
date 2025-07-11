@@ -10,14 +10,19 @@ import FirebaseFirestore
 
 class SalasTableViewController: UITableViewController {
     
-    let db = Firestore.firestore()
-    
+    let salaService = SalaService()
     var salas: [Sala] = []
+    let alunoService = AlunoService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        carregarSalas()
+        salaService.carregarSalas { [weak self] salas in
+            DispatchQueue.main.async {
+                self?.salas = salas
+                self?.tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -50,7 +55,9 @@ class SalasTableViewController: UITableViewController {
             }
             
             let novaSala = text
-            self.criarSala(sala: novaSala)
+            self.salaService.criarSala(sala: novaSala) { [weak self] text in
+                self?.validationAlert(title: "\(text)", message: "Nova sala criada com sucesso")
+            }
         }
         
         let cancel = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
@@ -73,33 +80,19 @@ class SalasTableViewController: UITableViewController {
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let sala = self.salas[indexPath.row]
-        let alunosRef = self.db.collection("alunos").whereField("sala", isEqualTo: sala.id)
+        var alunosRef: Query?
+        self.alunoService.buscarAlunosDaSala(sala: sala) { alunos in
+            alunosRef = alunos
+        }
         
         let desvincularAction = UIContextualAction(style: .normal, title: "Desvincular") { _, _, completionHandler in
             self.confirmationAlert(title: "Desvincular todos os alunos", message: "Tem certeza que deseja desvincular todos os alunos dessa sala?", onConfirm: {
-                alunosRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Erro ao buscar alunos: \(error.localizedDescription)")
-                    } else {
-                        let documentos = snapshot?.documents ?? []
-                        var desvinculados = 0
-                        let dispatchGroup = DispatchGroup()
-                        for doc in documentos {
-                            dispatchGroup.enter()
-                            let alunoRef = self.db.collection("alunos").document(doc.documentID)
-                            alunoRef.updateData(["sala": ""]) { err in
-                                if err == nil {
-                                    desvinculados += 1
-                                }
-                                dispatchGroup.leave()
-                            }
-                        }
-                        dispatchGroup.notify(queue: .main) {
-                            self.validationAlert(title: "\(desvinculados) Alunos Desvinculados", message: "")
-                        }
+                DispatchQueue.main.async {
+                    self.salaService.desvincularTodosOsAlunos(alunosRef: alunosRef!) { desvinculados in
+                        self.validationAlert(title: "\(desvinculados) alunos desvinculados", message: "")
                     }
-                    completionHandler(true)
                 }
+                completionHandler(true)
             })
         }
         desvincularAction.backgroundColor = .orange
@@ -112,10 +105,8 @@ class SalasTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "Salvar", style: .default, handler: { _ in
                 let novoNome = alert.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
                 if !novoNome.isEmpty {
-                    self.db.collection("salas").document(sala.id).updateData(["nome": novoNome]) { err in
-                        if let err = err {
-                            print("Erro ao renomear sala: \(err.localizedDescription)")
-                        } else {
+                    DispatchQueue.main.async {
+                        self.salaService.renomearSala(sala: sala, novoNome: novoNome) { novoNome in
                             self.salas[indexPath.row].nome = novoNome
                             self.tableView.reloadRows(at: [indexPath], with: .automatic)
                             self.validationAlert(title: "\(novoNome)", message: "Nome da sala atualizado")
@@ -129,81 +120,17 @@ class SalasTableViewController: UITableViewController {
         }
 
         let deleteAction = UIContextualAction(style: .destructive, title: "Apagar") { _, _, completionHandler in
-            self.salas.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            alunosRef.getDocuments { (snapshot, error) in
-                if let error = error {
-                    print("Erro ao buscar alunos: \(error.localizedDescription)")
-                    return
-                }
-                let documentos = snapshot?.documents ?? []
-                var desvinculados = 0
-                let dispatchGroup = DispatchGroup()
-                for doc in documentos {
-                    dispatchGroup.enter()
-                    let alunoRef = self.db.collection("alunos").document(doc.documentID)
-                    alunoRef.updateData(["sala": ""]) { err in
-                        if err == nil {
-                            desvinculados += 1
-                        }
-                        dispatchGroup.leave()
-                    }
-                }
-                dispatchGroup.notify(queue: .main) {
-                    self.db.collection("salas").document(sala.id).delete { err in
-                        if let err = err {
-                            print("Erro ao remover sala: \(err.localizedDescription)")
-                        } else {
-                            self.validationAlert(title: "Sala Removida", message: "\(desvinculados) alunos desvinculados da sala.")
-                        }
-                    }
+            self.salaService.deletarSala(alunosRef: alunosRef!, sala: sala) { desvinculados in
+                DispatchQueue.main.async {
+                    self.salas.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.validationAlert(title: "Sala Removida", message: "\(desvinculados) alunos desvinculados da sala.")
                 }
             }
             completionHandler(true)
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction, desvincularAction, renomearAction])
-    }
-    
-    //MARK: - Data Manipulation
-    
-    func criarSala(sala text: String) {
-        
-        db.collection("salas").addDocument(data: [
-            "nome": text
-        ]) { (error) in
-            if let e = error {
-                print("Issue saving to firestore, \(e)")
-            } else {
-                print("Successfully saved")
-            }
-        }
-        
-    }
-    
-    func carregarSalas() {
-        
-        db.collection("salas")
-            .order(by: "nome")
-            .addSnapshotListener { (snapshot, error) in
-            if let e = error {
-                print("Error retrieving data form Firestore -> \(e)")
-            } else {
-                if let snapshotDocuments = snapshot?.documents {
-                    self.salas.removeAll()
-                    for doc in snapshotDocuments {
-                        let data = doc.data()
-                        if let nome = data["nome"] as? String {
-                            let sala = Sala(id: doc.documentID, nome: nome)
-                            self.salas.append(sala)
-                        }
-                    }
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
     }
     
     //MARK: - TableView Delegate Methods

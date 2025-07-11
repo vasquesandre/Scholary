@@ -16,6 +16,7 @@
 		54C0F82C2E1CBBAB0094F4C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54C0F82B2E1CBBAB0094F4C4 /* GoogleService-Info.plist */; };
 		54D5E5FD2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5E5FC2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift */; };
 		54D9F1582E215854001CE65B /* AlunoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D9F1572E215854001CE65B /* AlunoService.swift */; };
+		54D9F15A2E2185DB001CE65B /* SalaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D9F1592E2185DB001CE65B /* SalaService.swift */; };
 		54DAA5F12E21395E008D6037 /* AlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */; };
 		54ED9AE12E1BF2E80088F031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED9AD72E1BF2E80088F031 /* AppDelegate.swift */; };
 		54ED9AE22E1BF2E80088F031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED9ADE2E1BF2E80088F031 /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 		54C0F82B2E1CBBAB0094F4C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54D5E5FC2E1C0D36002AAC5B /* SalaAlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaAlunosTableViewController.swift; sourceTree = "<group>"; };
 		54D9F1572E215854001CE65B /* AlunoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoService.swift; sourceTree = "<group>"; };
+		54D9F1592E2185DB001CE65B /* SalaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaService.swift; sourceTree = "<group>"; };
 		54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunosTableViewController.swift; sourceTree = "<group>"; };
 		54ED9ABF2E1BF2D90088F031 /* Scholary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scholary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54ED9AD72E1BF2E80088F031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				543FAFA92E1C46C5008B68B4 /* Aluno.swift */,
 				54D9F1572E215854001CE65B /* AlunoService.swift */,
 				543FAFAB2E1C4954008B68B4 /* Sala.swift */,
+				54D9F1592E2185DB001CE65B /* SalaService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				540A3AD92E20455B008DCC20 /* EditarAlunoViewController.swift in Sources */,
 				543FAFA82E1C1711008B68B4 /* VincularAlunosTableViewController.swift in Sources */,
 				54ED9AED2E1BF5DD0088F031 /* SalasTableViewController.swift in Sources */,
+				54D9F15A2E2185DB001CE65B /* SalaService.swift in Sources */,
 				540A3AD72E2023C0008DCC20 /* NovoAlunoViewController.swift in Sources */,
 				543FAFAC2E1C4954008B68B4 /* Sala.swift in Sources */,
 				54ED9AE12E1BF2E80088F031 /* AppDelegate.swift in Sources */,

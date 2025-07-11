@@ -82,4 +82,20 @@ class AlunoService {
         }
         completion(alunosParaVincular)
     }
+    
+    func desvincularAlunoSala(alunoASerDesvinculado aluno: Aluno, completion: @escaping (Aluno) -> Void) {
+        let alunoRef = self.db.collection("alunos").document(aluno.id)
+        alunoRef.updateData(["sala": ""]) { error in
+            if let error = error {
+                print("Erro ao desvincular aluno: \(error.localizedDescription)")
+            } else {
+                completion(aluno)
+            }
+        }
+    }
+    
+    func buscarAlunosDaSala(sala: Sala, completion: @escaping (Query) -> Void) {
+        var alunos = db.collection("alunos").whereField("sala", isEqualTo: sala.id)
+        completion(alunos)
+    }
 }

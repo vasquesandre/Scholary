@@ -6,11 +6,8 @@
 //
 
 import UIKit
-import FirebaseFirestore
 
 class SalaAlunosTableViewController: UITableViewController {
-    
-    let db = Firestore.firestore()
     
     let alunoService = AlunoService()
     var alunos: [Aluno] = []
@@ -74,15 +71,10 @@ class SalaAlunosTableViewController: UITableViewController {
         
         let removerAction = UIContextualAction(style: .destructive, title: "Remover") { _, _, completionHandler in
             let alunoASerDesvinculado = self.alunos[indexPath.row]
-            self.alunos.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            let alunoRef = self.db.collection("alunos").document(alunoASerDesvinculado.id)
-            alunoRef.updateData(["sala": ""]) { error in
-                if let error = error {
-                    print("Erro ao desvincular aluno: \(error.localizedDescription)")
-                } else {
-                    print("Aluno desvinculado da sala com sucesso.")
-                }
+            self.alunoService.desvincularAlunoSala(alunoASerDesvinculado: alunoASerDesvinculado) { aluno in
+                self.alunos.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.validationAlert(title: "\(aluno.nome)", message: "Aluno removido da sala com sucesso.")
             }
             completionHandler(true)
         }
@@ -106,7 +98,6 @@ class SalaAlunosTableViewController: UITableViewController {
                 let indexPath = indexPathParaEditar ?? tableView.indexPathForSelectedRow
                 if let indexPath = indexPath {
                     destination.aluno = alunos[indexPath.row]
-                    print(alunos[indexPath.row])
                     indexPathParaEditar = nil
                 }
             }

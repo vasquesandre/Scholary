@@ -96,14 +96,22 @@
         <!--Alunos-->
         <scene sceneID="mAd-vC-i8h">
             <objects>
-                <tableViewController id="SI3-Nt-99c" sceneMemberID="viewController">
+                <tableViewController id="SI3-Nt-99c" customClass="AlunosTableViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ino-gj-9Ia">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Digite o nome do aluno" id="eub-RU-O27">
+                            <rect key="frame" x="0.0" y="0.0" width="402" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="SI3-Nt-99c" id="UUb-of-k8S"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Ber-7B-hzY">
-                                <rect key="frame" x="0.0" y="50" width="402" height="51"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlunosCell" id="Ber-7B-hzY">
+                                <rect key="frame" x="0.0" y="94" width="402" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ber-7B-hzY" id="1VF-E9-eZI">
                                     <rect key="frame" x="0.0" y="0.0" width="402" height="51"/>
@@ -117,7 +125,11 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" selectedImage="figure.child" catalog="system" id="1gE-PF-MJ4"/>
-                    <navigationItem key="navigationItem" title="Alunos" id="oxl-ve-i3v"/>
+                    <navigationItem key="navigationItem" title="Alunos" id="oxl-ve-i3v">
+                        <barButtonItem key="rightBarButtonItem" title="Novo Aluno" id="qE0-KZ-JPJ">
+                            <color key="tintColor" systemColor="labelColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FD-Yq-uPU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -132,7 +144,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Digite o nome do aluno aqui" id="uJ3-eV-0GI">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Digite o nome do aluno" id="uJ3-eV-0GI">
                             <rect key="frame" x="0.0" y="0.0" width="402" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
