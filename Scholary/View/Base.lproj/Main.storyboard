@@ -86,7 +86,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="kb4-3O-e68" kind="show" identifier="adicionarAlunos" id="gnV-W2-Vl9"/>
-                        <segue destination="XEO-Ml-tPh" kind="showDetail" identifier="goToEditarAluno" id="iwM-0A-jzG"/>
+                        <segue destination="zoq-TA-nAF" kind="showDetail" identifier="goToEditarAlunoFromSalaAlunos" id="iwM-0A-jzG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQo-6L-YP4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -128,9 +128,15 @@
                     <navigationItem key="navigationItem" title="Alunos" id="oxl-ve-i3v">
                         <barButtonItem key="rightBarButtonItem" title="Novo Aluno" id="qE0-KZ-JPJ">
                             <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <segue destination="ZvJ-sE-fJU" kind="showDetail" id="mzY-Vv-aCF"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="zoq-TA-nAF" kind="showDetail" identifier="goToEditarAlunoFromAlunos" id="keg-ZR-3LC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FD-Yq-uPU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,6 +185,7 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <connections>
                                     <action selector="novoAlunoButtonPressed:" destination="kb4-3O-e68" id="tCt-Ua-kac"/>
+                                    <segue destination="ZvJ-sE-fJU" kind="showDetail" id="0Ok-zi-2ab"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -186,33 +193,32 @@
                     <connections>
                         <outlet property="doneButton" destination="wXz-ph-FdU" id="1i7-TJ-XMT"/>
                         <outlet property="novoAlunoButton" destination="kra-OD-mHL" id="EEs-VV-lQm"/>
-                        <segue destination="1hx-OX-sQg" kind="showDetail" identifier="goToNovoAluno" id="ZRl-VZ-slW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJS-xx-4tP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4912" y="311"/>
+            <point key="canvasLocation" x="5388.059701492537" y="762.70022883295189"/>
         </scene>
         <!--Editar Aluno View Controller-->
         <scene sceneID="c0E-ca-J1l">
             <objects>
                 <viewController id="XEO-Ml-tPh" userLabel="Editar Aluno View Controller" customClass="EditarAlunoViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I0z-oW-5iN">
-                        <rect key="frame" x="0.0" y="0.0" width="402" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WP3-Vr-8UI">
-                                <rect key="frame" x="16" y="87" width="370" height="140"/>
+                                <rect key="frame" x="16" y="255" width="370" height="134"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do Aluno" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tam-mq-1YT">
-                                        <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="30"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tam-mq-1YT">
+                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pfJ-9d-tau">
-                                        <rect key="frame" x="0.0" y="40" width="370" height="45"/>
-                                        <color key="backgroundColor" red="0.1529411765" green="0.13725490200000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="34" width="370" height="45"/>
+                                        <color key="backgroundColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.40000000000000002" alpha="0.20397555443548387" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Kj9-jA-oL4"/>
                                         </constraints>
@@ -220,7 +226,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thU-MF-xjJ">
-                                        <rect key="frame" x="0.0" y="95" width="370" height="45"/>
+                                        <rect key="frame" x="0.0" y="89" width="370" height="45"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="BX4-tz-ahx"/>
@@ -253,34 +259,41 @@
                             <constraint firstItem="WP3-Vr-8UI" firstAttribute="leading" secondItem="9cN-1K-P8V" secondAttribute="leading" constant="16" id="QX4-Ad-gYV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Editar aluno" id="XEA-jB-trr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cEF-Nz-I45">
+                            <connections>
+                                <action selector="closeButton:" destination="XEO-Ml-tPh" id="RaN-xy-oae"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nomeAlunoTextField" destination="pfJ-9d-tau" id="XmP-Sh-lce"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V81-0e-eUX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4912" y="-512"/>
+            <point key="canvasLocation" x="4394.0298507462685" y="762.70022883295189"/>
         </scene>
-        <!--Novo Aluno View Controller-->
+        <!--Novo aluno-->
         <scene sceneID="bOy-qo-HdY">
             <objects>
                 <viewController id="1hx-OX-sQg" customClass="NovoAlunoViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jFB-tr-2V8">
-                        <rect key="frame" x="0.0" y="0.0" width="402" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-hx-VhK">
-                                <rect key="frame" x="16" y="87" width="370" height="140"/>
+                                <rect key="frame" x="16" y="255" width="370" height="134"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do Aluno" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajZ-el-EZr">
-                                        <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="30"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajZ-el-EZr">
+                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nTF-Ir-fdP">
-                                        <rect key="frame" x="0.0" y="40" width="370" height="45"/>
-                                        <color key="backgroundColor" red="0.1529411765" green="0.13725490200000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="34" width="370" height="45"/>
+                                        <color key="backgroundColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.40000000000000002" alpha="0.20195942540322581" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="huF-WG-Rxe"/>
                                         </constraints>
@@ -288,7 +301,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" textContentType="name"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2CD-v9-ke4">
-                                        <rect key="frame" x="0.0" y="95" width="370" height="45"/>
+                                        <rect key="frame" x="0.0" y="89" width="370" height="45"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="DGk-vu-Tx4"/>
@@ -321,13 +334,20 @@
                             <constraint firstItem="QAZ-hx-VhK" firstAttribute="leading" secondItem="s88-Jf-O0d" secondAttribute="leading" constant="16" id="jUr-X6-83Z"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Novo aluno" id="LcT-Vw-IB2">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uMT-td-H6c">
+                            <connections>
+                                <action selector="closeButton:" destination="1hx-OX-sQg" id="mKh-t6-skM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nomeAlunoTextField" destination="nTF-Ir-fdP" id="Qgf-2R-AR4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1Q-Wq-ZhU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5867" y="311"/>
+            <point key="canvasLocation" x="4394.0298507462685" y="1577.574370709382"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5Pv-6E-k9s">
@@ -396,7 +416,47 @@
             </objects>
             <point key="canvasLocation" x="1588" y="-85"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="e86-sg-DSq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZvJ-sE-fJU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0B5-uW-aZG">
+                        <rect key="frame" x="0.0" y="124" width="402" height="106"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1hx-OX-sQg" kind="relationship" relationship="rootViewController" id="pbS-Uc-bFo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y91-XH-69z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3474.6268656716416" y="1577.574370709382"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="w98-hx-Hz8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zoq-TA-nAF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="bUq-Wo-q5F">
+                        <rect key="frame" x="0.0" y="124" width="402" height="106"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XEO-Ml-tPh" kind="relationship" relationship="rootViewController" id="WhO-5z-LNW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yVh-9N-vnf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3474.6268656716416" y="762.70022883295189"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iwM-0A-jzG"/>
+        <segue reference="0Ok-zi-2ab"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="figure.child" catalog="system" width="105" height="128"/>
         <image name="studentdesk" catalog="system" width="123" height="128"/>

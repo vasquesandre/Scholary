@@ -11,6 +11,8 @@ class AlunosTableViewController: UITableViewController {
     
     let alunoService = AlunoService()
     var alunos: [Aluno] = []
+    
+    var alunoForEdit: Aluno?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,43 @@ class AlunosTableViewController: UITableViewController {
         return cell
         
     }
+    
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let editarAction = UIContextualAction(style: .normal, title: "Editar") { _, _, completionHandler in
+            self.alunoForEdit = self.alunos[indexPath.row]
+            self.performSegue(withIdentifier: "goToEditarAlunoFromAlunos", sender: self)
+        }
+        
+        let removerAction = UIContextualAction(style: .destructive, title: "Desvincular") { _, _, completionHandler in
+            let alunoASerDesvinculado = self.alunos[indexPath.row]
+            self.alunoService.desvincularAlunoSala(alunoASerDesvinculado: alunoASerDesvinculado) { aluno in
+                tableView.reloadData()
+                self.validationAlert(title: "\(aluno.nome)", message: "Aluno desvinculado da sala com sucesso.")
+            }
+            completionHandler(true)
+        }
+        
+        let aluno = alunos[indexPath.row]
+        
+        if let salaNome = aluno.salaNome, !salaNome.isEmpty {
+            return UISwipeActionsConfiguration(actions: [removerAction, editarAction])
+        } else {
+            return UISwipeActionsConfiguration(actions: [editarAction])
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToEditarAlunoFromAlunos" {
+            if let nav = segue.destination as? UINavigationController,
+               let destination = nav.viewControllers.first as? EditarAlunoViewController {
+                if let aluno = alunoForEdit {
+                    destination.aluno = aluno
+                }
+            }
+        }
+    }
 
 }
 
@@ -72,3 +111,4 @@ extension AlunosTableViewController: UISearchBarDelegate {
         }
     }
 }
+

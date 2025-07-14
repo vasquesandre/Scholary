@@ -14,6 +14,11 @@ class NovoAlunoViewController: UIViewController {
     
     @IBOutlet weak var nomeAlunoTextField: UITextField!
     
+    
+    @IBAction func closeButton(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true)
+    }
+    
     @IBAction func adicionarButton(_ sender: UIButton) {
         guard let text = nomeAlunoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty else {
             return

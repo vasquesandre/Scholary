@@ -66,7 +66,7 @@ class SalaAlunosTableViewController: UITableViewController {
         
         let editarAction = UIContextualAction(style: .normal, title: "Editar") { _, _, completionHandler in
             self.indexPathParaEditar = indexPath
-            self.performSegue(withIdentifier: "goToEditarAluno", sender: self)
+            self.performSegue(withIdentifier: "goToEditarAlunoFromSalaAlunos", sender: self)
         }
         
         let removerAction = UIContextualAction(style: .destructive, title: "Remover") { _, _, completionHandler in
@@ -93,7 +93,7 @@ class SalaAlunosTableViewController: UITableViewController {
             if let destination = segue.destination as? VincularAlunosTableViewController, let sala = salaSelecionada {
                 destination.salaSelecionada = sala
             }
-        } else if segue.identifier == "goToEditarAluno" {
+        } else if segue.identifier == "goToEditarAlunoFromSalaAlunos" {
             if let destination = segue.destination as? EditarAlunoViewController {
                 let indexPath = indexPathParaEditar ?? tableView.indexPathForSelectedRow
                 if let indexPath = indexPath {

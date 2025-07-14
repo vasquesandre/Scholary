@@ -16,6 +16,10 @@ class EditarAlunoViewController: UIViewController {
     
     @IBOutlet weak var nomeAlunoTextField: UITextField!
     
+    @IBAction func closeButton(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
