@@ -23,6 +23,8 @@ class SalasTableViewController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
+        
+        tableView.rowHeight = 60
     }
 
     // MARK: - Table view data source
@@ -34,6 +36,8 @@ class SalasTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SalasCell", for: indexPath)
+        
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
         
         let sala = salas[indexPath.row]
         

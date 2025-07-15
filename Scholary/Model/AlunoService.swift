@@ -81,6 +81,37 @@ class AlunoService {
         }
     }
     
+    func realizarChamada(salaSelecionada sala: Sala?, alunosSelecionados: Set<Int>, alunosArray alunos: [Aluno], completion: @escaping ([Aluno]) -> Void) {
+        guard let sala = sala else {
+            completion([])
+            return
+        }
+        
+        let alunosPresentes = alunosSelecionados
+        let chamadaRef = db.collection("chamadas").document()
+        let dataHora = Timestamp(date: Date())
+
+        let alunosArray = alunos.enumerated().map { index, aluno in
+            [
+                "id": aluno.id,
+                "presenca": alunosPresentes.contains(index)
+            ]
+        }
+
+        let chamadaData: [String: Any] = [
+            "salaId": sala.id,
+            "dataHora": dataHora,
+            "alunos": alunosArray
+        ]
+
+        chamadaRef.setData(chamadaData) { error in
+            if let error = error {
+                print("Erro ao registrar chamada: \(error)")
+            }
+        }
+        completion(alunosSelecionados.map { alunos[$0] })
+    }
+    
     func vincularAlunosSala(salaSelecionada sala: Sala?, alunosParaVincular: Set<Int>, alunosArray alunos: [Aluno], completion: @escaping ([Aluno]) -> Void) {
         guard let sala = sala else {
             completion([])

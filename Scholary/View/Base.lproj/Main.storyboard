@@ -51,24 +51,14 @@
             </objects>
             <point key="canvasLocation" x="2525.373134328358" y="-85.125858123569785"/>
         </scene>
-        <!--Selecionar Alunos-->
+        <!--Sala Alunos-->
         <scene sceneID="STX-Nd-w8l">
             <objects>
-                <tableViewController id="f8Z-dy-Hp4" userLabel="Selecionar Alunos" customClass="SalaAlunosTableViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="f8Z-dy-Hp4" userLabel="Sala Alunos" customClass="SalaAlunosTableViewController" customModule="Scholary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gII-D9-TXZ">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="GRu-xH-xPF">
-                                <rect key="frame" x="0.0" y="50" width="402" height="52"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GRu-xH-xPF" id="rTo-eX-2b6">
-                                    <rect key="frame" x="0.0" y="0.0" width="402" height="52"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="f8Z-dy-Hp4" id="yV5-CE-RJN"/>
                             <outlet property="delegate" destination="f8Z-dy-Hp4" id="DWM-Zk-3z7"/>
@@ -76,12 +66,15 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="kw6-NF-JcH"/>
                     <navigationItem key="navigationItem" title="Alunos" id="4v6-C9-w83">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mUV-vY-oz7">
-                            <color key="tintColor" systemColor="labelColor"/>
-                            <connections>
-                                <action selector="addButtonPressed:" destination="f8Z-dy-Hp4" id="4An-11-j1S"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="mUV-vY-oz7">
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="f8Z-dy-Hp4" id="4An-11-j1S"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Selecionar" id="qJw-AD-w82"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

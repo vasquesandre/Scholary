@@ -58,14 +58,6 @@ class VincularAlunosTableViewController: UITableViewController {
         
     }
     
-//    //MARK: - Novo Aluno Button Pressed
-//    
-//    @IBAction func novoAlunoButtonPressed(_ sender: UIBarButtonItem) {
-//        
-//        performSegue(withIdentifier: "goToNovoAluno", sender: self)
-//        
-//    }
-    
     //MARK: - Done Button Pressed
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {

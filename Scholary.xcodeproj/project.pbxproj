@@ -18,6 +18,8 @@
 		54D9F1582E215854001CE65B /* AlunoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D9F1572E215854001CE65B /* AlunoService.swift */; };
 		54D9F15A2E2185DB001CE65B /* SalaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D9F1592E2185DB001CE65B /* SalaService.swift */; };
 		54DAA5F12E21395E008D6037 /* AlunosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */; };
+		54EBA77D2E258C8B006F8F62 /* AlunoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EBA77B2E258C8B006F8F62 /* AlunoTableViewCell.swift */; };
+		54EBA77E2E258C8B006F8F62 /* AlunoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EBA77C2E258C8B006F8F62 /* AlunoTableViewCell.xib */; };
 		54ED9AE12E1BF2E80088F031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED9AD72E1BF2E80088F031 /* AppDelegate.swift */; };
 		54ED9AE22E1BF2E80088F031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED9ADE2E1BF2E80088F031 /* SceneDelegate.swift */; };
 		54ED9AE42E1BF2E80088F031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54ED9AD82E1BF2E80088F031 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 		54D9F1572E215854001CE65B /* AlunoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoService.swift; sourceTree = "<group>"; };
 		54D9F1592E2185DB001CE65B /* SalaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaService.swift; sourceTree = "<group>"; };
 		54DAA5F02E21395E008D6037 /* AlunosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunosTableViewController.swift; sourceTree = "<group>"; };
+		54EBA77B2E258C8B006F8F62 /* AlunoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoTableViewCell.swift; sourceTree = "<group>"; };
+		54EBA77C2E258C8B006F8F62 /* AlunoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlunoTableViewCell.xib; sourceTree = "<group>"; };
 		54ED9ABF2E1BF2D90088F031 /* Scholary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scholary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54ED9AD72E1BF2E80088F031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54ED9AD82E1BF2E80088F031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				54ED9ADD2E1BF2E80088F031 /* Main.storyboard */,
+				54EBA77B2E258C8B006F8F62 /* AlunoTableViewCell.swift */,
+				54EBA77C2E258C8B006F8F62 /* AlunoTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 				54ED9AE42E1BF2E80088F031 /* Assets.xcassets in Resources */,
 				54C0F82C2E1CBBAB0094F4C4 /* GoogleService-Info.plist in Resources */,
 				54ED9AE62E1BF2E80088F031 /* LaunchScreen.storyboard in Resources */,
+				54EBA77E2E258C8B006F8F62 /* AlunoTableViewCell.xib in Resources */,
 				54ED9AE72E1BF2E80088F031 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				540A3AD42E200617008DCC20 /* Alerts.swift in Sources */,
+				54EBA77D2E258C8B006F8F62 /* AlunoTableViewCell.swift in Sources */,
 				54D9F1582E215854001CE65B /* AlunoService.swift in Sources */,
 				540A3AD92E20455B008DCC20 /* EditarAlunoViewController.swift in Sources */,
 				543FAFA82E1C1711008B68B4 /* VincularAlunosTableViewController.swift in Sources */,
